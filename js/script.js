@@ -1,9 +1,21 @@
-// Smooth scrolling for navigation
-document.querySelectorAll('.nav-link').forEach(anchor => {
+// Smooth scrolling for ALL internal links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
         e.preventDefault();
         const target = document.querySelector(this.getAttribute('href'));
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        
+        if (target) {
+            // Close mobile menu if open
+            const hamburger = document.getElementById('hamburger');
+            const navMenu = document.getElementById('navMenu');
+            if (hamburger && navMenu) {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            }
+            
+            // Smooth scroll to target
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
     });
 });
 
