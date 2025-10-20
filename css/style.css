@@ -201,7 +201,22 @@ nav {
 }
 
 /* Mobile Navigation */
+
 @media (max-width: 768px) {
+    nav {
+        padding: 1.2rem 5%;
+    }
+    
+    .nav-logo {
+        font-size: 1.1rem;
+        max-width: 60%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    
+    /* OR use initials on mobile - see option below */
+    
     .hamburger {
         display: flex;
     }
