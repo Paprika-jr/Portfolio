@@ -1,3 +1,42 @@
+// ===== LOADING SCREEN =====
+window.addEventListener('load', () => {
+    const loadingScreen = document.getElementById('loadingScreen');
+    if (loadingScreen) {
+        setTimeout(() => {
+            loadingScreen.classList.add('hidden');
+            setTimeout(() => {
+                loadingScreen.style.display = 'none';
+            }, 500);
+        }, 1000);
+    }
+});
+
+// ===== ENHANCED SCROLL ANIMATIONS =====
+const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+};
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            
+            // Staggered animation for project cards
+            if (entry.target.classList.contains('project-card')) {
+                const cards = document.querySelectorAll('.project-card');
+                const index = Array.from(cards).indexOf(entry.target);
+                entry.target.style.animationDelay = `${index * 0.2}s`;
+            }
+        }
+    });
+}, observerOptions);
+
+// Observe all animated elements
+document.querySelectorAll('.fade-in, .fade-in-left, .fade-in-right, .scale-in, .project-card').forEach(el => {
+    observer.observe(el);
+});
+
 // Smooth scrolling for ALL internal links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
@@ -47,21 +86,54 @@ for (let i = 0; i < 15; i++) {
 // Continuously add new notes
 setInterval(createNote, 2000);
 
-// Add intersection observer for fade-in animations
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -100px 0px'
-};
-
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.style.animation = 'fadeInUp 0.8s ease forwards';
-        }
+// ===== ENHANCED MICRO-INTERACTIONS =====
+// Add ripple effect to buttons
+document.querySelectorAll('.cv-btn, .secondary-btn, .contact-btn, .project-link').forEach(button => {
+    button.addEventListener('click', function(e) {
+        const ripple = document.createElement('span');
+        const rect = this.getBoundingClientRect();
+        const size = Math.max(rect.width, rect.height);
+        const x = e.clientX - rect.left - size / 2;
+        const y = e.clientY - rect.top - size / 2;
+        
+        ripple.style.width = ripple.style.height = size + 'px';
+        ripple.style.left = x + 'px';
+        ripple.style.top = y + 'px';
+        ripple.classList.add('ripple');
+        
+        this.appendChild(ripple);
+        
+        setTimeout(() => {
+            ripple.remove();
+        }, 600);
     });
-}, observerOptions);
+});
 
-document.querySelectorAll('.container').forEach(el => observer.observe(el));
+// Add CSS for ripple effect
+const style = document.createElement('style');
+style.textContent = `
+    .cv-btn, .secondary-btn, .contact-btn, .project-link {
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .ripple {
+        position: absolute;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.3);
+        transform: scale(0);
+        animation: ripple-animation 0.6s linear;
+        pointer-events: none;
+    }
+    
+    @keyframes ripple-animation {
+        to {
+            transform: scale(4);
+            opacity: 0;
+        }
+    }
+`;
+document.head.appendChild(style);
 
 // Highlight active section in navigation
 window.addEventListener('scroll', () => {
@@ -137,3 +209,134 @@ document.addEventListener('click', (e) => {
         navMenu.classList.remove('active');
     }
 });
+
+// ===== ENHANCED INTERACTIVE FEATURES =====
+// Add typing animation to profile name
+function typeWriter(element, text, speed = 100) {
+    let i = 0;
+    element.innerHTML = '';
+    
+    function type() {
+        if (i < text.length) {
+            element.innerHTML += text.charAt(i);
+            i++;
+            setTimeout(type, speed);
+        }
+    }
+    type();
+}
+
+// Add parallax effect to profile picture
+window.addEventListener('scroll', () => {
+    const profilePic = document.querySelector('.profile-pic');
+    if (profilePic) {
+        const scrolled = window.pageYOffset;
+        const rate = scrolled * -0.5;
+        profilePic.style.transform = `translateY(${rate}px)`;
+    }
+});
+
+// Add floating animation to skill tags
+document.querySelectorAll('.skill-tag').forEach((tag, index) => {
+    tag.style.animationDelay = `${index * 0.1}s`;
+    tag.addEventListener('mouseenter', function() {
+        this.style.animationPlayState = 'paused';
+    });
+    tag.addEventListener('mouseleave', function() {
+        this.style.animationPlayState = 'running';
+    });
+});
+
+// Add enhanced hover effects to project cards
+document.querySelectorAll('.project-card').forEach(card => {
+    card.addEventListener('mouseenter', function() {
+        this.style.transform = 'translateY(-15px) scale(1.02) rotateX(5deg)';
+    });
+    
+    card.addEventListener('mouseleave', function() {
+        this.style.transform = 'translateY(0) scale(1) rotateX(0deg)';
+    });
+});
+
+// Add smooth reveal animation to sections
+const sections = document.querySelectorAll('section');
+const revealSection = function(entries, observer) {
+    const [entry] = entries;
+    if (!entry.isIntersecting) return;
+    
+    entry.target.classList.add('section-revealed');
+    observer.unobserve(entry.target);
+};
+
+const sectionObserver = new IntersectionObserver(revealSection, {
+    root: null,
+    threshold: 0.15,
+});
+
+sections.forEach(section => {
+    sectionObserver.observe(section);
+});
+
+// Add CSS for section reveal
+const sectionStyle = document.createElement('style');
+sectionStyle.textContent = `
+    section {
+        opacity: 0;
+        transform: translateY(50px);
+        transition: all 0.8s ease;
+    }
+    
+    section.section-revealed {
+        opacity: 1;
+        transform: translateY(0);
+    }
+`;
+document.head.appendChild(sectionStyle);
+
+// ===== CURSOR TRAIL EFFECT =====
+let mouseX = 0, mouseY = 0;
+let trail = [];
+
+document.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    
+    // Create trail element
+    const trailElement = document.createElement('div');
+    trailElement.className = 'cursor-trail';
+    trailElement.style.left = mouseX + 'px';
+    trailElement.style.top = mouseY + 'px';
+    document.body.appendChild(trailElement);
+    
+    // Remove after animation
+    setTimeout(() => {
+        trailElement.remove();
+    }, 1000);
+});
+
+// Add CSS for cursor trail
+const trailStyle = document.createElement('style');
+trailStyle.textContent = `
+    .cursor-trail {
+        position: fixed;
+        width: 4px;
+        height: 4px;
+        background: var(--primary-color);
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 9999;
+        animation: trailFade 1s ease-out forwards;
+    }
+    
+    @keyframes trailFade {
+        0% {
+            opacity: 1;
+            transform: scale(1);
+        }
+        100% {
+            opacity: 0;
+            transform: scale(0);
+        }
+    }
+`;
+document.head.appendChild(trailStyle);

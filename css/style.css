@@ -7,6 +7,8 @@
     --bg-light: #1a1f3a;
     --text-primary: #ffffff;
     --text-secondary: #b8c1ec;
+    --animation-speed: 0.3s;
+    --bounce-speed: 0.6s;
 }
 
 * {
@@ -21,6 +23,87 @@ body {
     color: var(--text-primary);
     overflow-x: hidden;
     line-height: 1.6;
+    scroll-behavior: smooth;
+}
+
+/* ===== LOADING ANIMATION ===== */
+.loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--bg-dark);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    opacity: 1;
+    transition: opacity 0.5s ease;
+}
+
+.loading-screen.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.loading-spinner {
+    width: 60px;
+    height: 60px;
+    border: 4px solid rgba(0, 212, 255, 0.1);
+    border-left: 4px solid var(--primary-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* ===== ENHANCED FADE IN ANIMATIONS ===== */
+.fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease;
+}
+
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.fade-in-left {
+    opacity: 0;
+    transform: translateX(-50px);
+    transition: all 0.8s ease;
+}
+
+.fade-in-left.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.fade-in-right {
+    opacity: 0;
+    transform: translateX(50px);
+    transition: all 0.8s ease;
+}
+
+.fade-in-right.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.scale-in {
+    opacity: 0;
+    transform: scale(0.8);
+    transition: all 0.6s ease;
+}
+
+.scale-in.visible {
+    opacity: 1;
+    transform: scale(1);
 }
 
 /* ===== MUSICAL NOTES ANIMATION ===== */
@@ -39,10 +122,10 @@ body {
     position: absolute;
     font-size: 24px;
     opacity: 0.15;
-    animation: float 15s infinite ease-in-out;
+    animation: floatUp 15s infinite ease-in-out;
 }
 
-@keyframes float {
+@keyframes floatUp {
     0% {
         transform: translateY(100vh) rotate(0deg);
         opacity: 0;
@@ -307,6 +390,31 @@ section {
     box-shadow: 0 0 40px rgba(0, 212, 255, 0.4);
     animation: pulse 2s ease-in-out infinite;
     flex-shrink: 0;
+    transition: all var(--animation-speed) ease;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.profile-pic::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, transparent, rgba(0, 212, 255, 0.1), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.6s ease;
+}
+
+.profile-pic:hover::before {
+    transform: translateX(100%);
+}
+
+.profile-pic:hover {
+    transform: scale(1.05) rotate(2deg);
+    box-shadow: 0 0 60px rgba(0, 212, 255, 0.6);
 }
 
 @keyframes pulse {
@@ -364,10 +472,28 @@ h1 {
     border-radius: 30px;
     font-weight: 600;
     font-size: 1rem;
-    transition: all 0.3s ease;
+    transition: all var(--animation-speed) ease;
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
+    position: relative;
+    overflow: hidden;
+    transform: translateY(0);
+}
+
+.cv-btn::before, .secondary-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+.cv-btn:hover::before, .secondary-btn:hover::before {
+    left: 100%;
 }
 
 .cv-btn {
@@ -377,8 +503,13 @@ h1 {
 }
 
 .cv-btn:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(0, 212, 255, 0.5);
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 15px 40px rgba(0, 212, 255, 0.5);
+}
+
+.cv-btn:active {
+    transform: translateY(-3px) scale(0.98);
+    transition: all 0.1s ease;
 }
 
 .cv-btn span {
@@ -393,7 +524,13 @@ h1 {
 
 .secondary-btn:hover {
     background: rgba(0, 212, 255, 0.1);
-    transform: translateY(-5px);
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
+}
+
+.secondary-btn:active {
+    transform: translateY(-3px) scale(0.98);
+    transition: all 0.1s ease;
 }
 
 /* ===== ABOUT SECTION ===== */
@@ -456,12 +593,50 @@ h2::after {
     border-radius: 20px;
     font-size: 0.9rem;
     border: 1px solid var(--primary-color);
-    transition: all 0.3s ease;
+    transition: all var(--animation-speed) ease;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.skill-tag::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.3), transparent);
+    transition: left 0.5s ease;
+}
+
+.skill-tag:hover::before {
+    left: 100%;
 }
 
 .skill-tag:hover {
     background: rgba(0, 212, 255, 0.2);
-    transform: translateY(-2px);
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 5px 15px rgba(0, 212, 255, 0.3);
+}
+
+.skill-tag:active {
+    transform: translateY(-2px) scale(0.95);
+    transition: all 0.1s ease;
+}
+
+/* Floating animation for skill tags */
+@keyframes floatSkill {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.skill-tag {
+    animation: floatSkill 3s ease-in-out infinite;
 }
 
 /* ===== PROJECTS SECTION ===== */
@@ -477,9 +652,11 @@ h2::after {
     padding: 2rem;
     border-radius: 15px;
     border: 1px solid rgba(0, 212, 255, 0.2);
-    transition: all 0.4s ease;
+    transition: all var(--animation-speed) ease;
     position: relative;
     overflow: hidden;
+    cursor: pointer;
+    transform: translateY(0);
 }
 
 .project-card::before {
@@ -498,9 +675,14 @@ h2::after {
 }
 
 .project-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 10px 40px rgba(0, 212, 255, 0.3);
+    transform: translateY(-15px) scale(1.02);
+    box-shadow: 0 20px 60px rgba(0, 212, 255, 0.4);
     border-color: var(--primary-color);
+}
+
+.project-card:active {
+    transform: translateY(-8px) scale(0.98);
+    transition: all 0.1s ease;
 }
 
 .project-card h3 {
@@ -521,12 +703,34 @@ h2::after {
     text-decoration: none;
     border-radius: 25px;
     font-weight: 600;
-    transition: all 0.3s ease;
+    transition: all var(--animation-speed) ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.project-link::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+.project-link:hover::before {
+    left: 100%;
 }
 
 .project-link:hover {
-    transform: scale(1.05);
-    box-shadow: 0 5px 20px rgba(0, 212, 255, 0.4);
+    transform: scale(1.08) translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 212, 255, 0.5);
+}
+
+.project-link:active {
+    transform: scale(0.95);
+    transition: all 0.1s ease;
 }
 
 /* ===== CONTACT SECTION ===== */
@@ -608,8 +812,13 @@ h2::after {
 .contact-btn:hover {
     background: var(--primary-color);
     color: var(--bg-dark);
-    transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
+    transform: translateY(-8px) scale(1.05);
+    box-shadow: 0 15px 40px rgba(0, 212, 255, 0.4);
+}
+
+.contact-btn:active {
+    transform: translateY(-4px) scale(0.98);
+    transition: all 0.1s ease;
 }
 
 /* ===== FOOTER ===== */
