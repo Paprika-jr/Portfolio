@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Khun Htet Lin Aung - Portfolio</title>
     <link rel="stylesheet" href="css/style.css">
+    <script src="https://unpkg.com/lucide@latest" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js" defer></script>
     
 </head>
 <body>
@@ -66,43 +68,69 @@
             <h2 class="fade-in">About Me</h2>
             <div class="about-content">
                 <div class="about-text fade-in-left">
+                    <h3 class="subheading"><i data-lucide="user"></i> Overview</h3>
                     <p>
-                        Hello! I'm a dedicated second-year ICT student at Jamk University of Applied Sciences 
-                        in Finland. My journey into technology started with curiosity and has grown into a 
-                        genuine passion for creating solutions that make a difference.
-                    </p>
-                    <p>
-                        Beyond coding, I'm an avid guitarist who believes that music and programming share 
-                        a common thread, they're both about creating something beautiful from patterns and 
-                        logic. This creative mindset helps me approach technical challenges with fresh perspectives.
-                    </p>
-                    <p>
-                        I'm particularly interested in web development, software engineering, and the intersection 
-                        of technology with creative arts. Always eager to learn new technologies and contribute 
+                        Hello! I'm a dedicated second-year ICT student at Jamk University of Applied Sciences in Finland.
+                        I enjoy building practical, clean interfaces and shipping real products like a
+                        production‑ready digital menu and ordering system for cafés. I'm particularly 
+                        interested in web development, software engineering, and the intersection of 
+                        technology with creative arts. Always eager to learn new technologies and contribute 
                         to meaningful projects.
                     </p>
+                    <ul class="about-bullets">
+                        <li>Frontend focus with solid product thinking</li>
+                        <li>Comfortable with React, Firebase, and deployment</li>
+                        <li>Clean UI, minimal interactions, and accessibility</li>
+                        <li>Always learning and iterating based on feedback</li>
+                    </ul>
+                    <div class="card quick-facts">
+                        <h3 class="subheading"><i data-lucide="info"></i> Quick Facts</h3>
+                        <div class="facts-grid">
+                            <div class="fact"><i data-lucide="graduation-cap"></i><span>ICT @ Jamk UAS (Y2)</span></div>
+                            <div class="fact"><i data-lucide="map-pin"></i><span>Jyväskylä, Finland</span></div>
+                            <div class="fact"><i data-lucide="target"></i><span>Web Dev, React, Firebase</span></div>
+                            <div class="fact"><i data-lucide="briefcase"></i><span>Open to internships</span></div>
+                        </div>
+                    </div>
                 </div>
-                <div class="fade-in-right">
-                    <div class="education">
-                        <h3>🎓 Education</h3>
+                <div class="fade-in-right about-right">
+                    <div class="education card">
+                        <h3><i data-lucide="graduation-cap"></i> Education</h3>
                         <p><strong>Jamk University of Applied Sciences</strong></p>
                         <p>Bachelor's Degree in ICT</p>
                         <p>Second Year | 2024 - Present</p>
                         <p>Jyväskylä, Finland</p>
-                        <br>
-                        <p><strong>Educatry Academy</strong></p>
-                        <p>GED High School Diploma</p>
-                        <p>Taunggyi, Myanmar</p>
                     </div>
-                    
-                    <div class="skills">
-                        <span class="skill-tag">HTML/CSS</span>
-                        <span class="skill-tag">JavaScript</span>
-                        <span class="skill-tag">Python</span>
-                        <span class="skill-tag">React</span>
-                        <span class="skill-tag">Git</span>
-                        <span class="skill-tag">Web Development</span>
-                        <span class="skill-tag">Problem Solving</span>
+                    <div class="skills card">
+                        <h3 class="subheading"><i data-lucide="sparkles"></i> Skills</h3>
+                        <div class="skill-groups">
+                            <div class="skill-group">
+                                <h4>Frontend</h4>
+                                <div class="tags">
+                                    <span class="skill-tag">HTML</span>
+                                    <span class="skill-tag">CSS</span>
+                                    <span class="skill-tag">JavaScript</span>
+                                    <span class="skill-tag">React</span>
+                                </div>
+                            </div>
+                            <div class="skill-group">
+                                <h4>Backend & Cloud</h4>
+                                <div class="tags">
+                                    <span class="skill-tag">Python</span>
+                                    <span class="skill-tag">Firebase</span>
+                                    <span class="skill-tag">Firestore</span>
+                                    <span class="skill-tag">Auth</span>
+                                </div>
+                            </div>
+                            <div class="skill-group">
+                                <h4>Tools</h4>
+                                <div class="tags">
+                                    <span class="skill-tag">Git</span>
+                                    <span class="skill-tag">Vite</span>
+                                    <span class="skill-tag">Vercel</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -115,17 +143,32 @@
             <h2 class="fade-in">My Projects</h2>
             <div class="projects-grid">
                 <div class="project-card fade-in">
-                    <h3>🎵 Project One</h3>
-                    <p>Future project here.</p>
-                    <a href="https://github.com/yourusername/project1" class="project-link" target="_blank">View on GitHub</a>
+                    <h3><i data-lucide="tablet-smartphone"></i> Digital Menu & Ordering System</h3>
+                    <p>
+                        Mobile-first menu and real-time ordering for restaurants. Customers scan a QR code,
+                        browse items, add to cart, place orders, and track status live. Includes a secure
+                        admin dashboard for order management and status updates.
+                    </p>
+                    <div class="project-badges">
+                        <span class="skill-tag">React 18</span>
+                        <span class="skill-tag">Vite</span>
+                        <span class="skill-tag">Firebase Auth</span>
+                        <span class="skill-tag">Firestore (Realtime)</span>
+                        <span class="skill-tag">Vercel</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://digital-menu-nine-fawn.vercel.app" class="project-link" target="_blank" rel="noopener">Live Demo</a>
+                        <a href="https://digital-menu-nine-fawn.vercel.app/admin" class="project-link" target="_blank" rel="noopener">Admin</a>
+                        <a href="https://github.com/Paprika-jr/digital-menu" class="project-link" target="_blank" rel="noopener">GitHub</a>
+                    </div>
                 </div>
                 <div class="project-card fade-in">
-                    <h3>🎸 Project Two</h3>
+                    <h3><i data-lucide="layers"></i> Project Two</h3>
                     <p>Future project here.</p>
                     <a href="https://github.com/yourusername/project2" class="project-link" target="_blank">View on GitHub</a>
                 </div>
                 <div class="project-card fade-in">
-                    <h3>🎹 Project Three</h3>
+                    <h3><i data-lucide="boxes"></i> Project Three</h3>
                     <p>Future project here.</p>
                     <a href="https://github.com/yourusername/project3" class="project-link" target="_blank">View on GitHub</a>
                 </div>
@@ -146,6 +189,34 @@
                     <span class="email-text">hlin14046@gmail.com</span>
                 </button>
             </div>
+            <form id="contactForm" class="contact-form fade-in" novalidate>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" placeholder="Your name" required>
+                        <small class="error" data-error-for="name"></small>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" placeholder="you@example.com" required>
+                        <small class="error" data-error-for="email"></small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="subject">Subject</label>
+                    <input type="text" id="subject" name="subject" placeholder="What's this about?" required>
+                    <small class="error" data-error-for="subject"></small>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" rows="5" placeholder="Write your message" required></textarea>
+                    <small class="error" data-error-for="message"></small>
+                </div>
+                <button type="submit" class="contact-btn submit-btn" id="sendMessageBtn">
+                    Send Message
+                </button>
+                <div class="form-status" id="formStatus" aria-live="polite"></div>
+            </form>
             <div class="copy-notification" id="copyNotification">✓ Email copied to clipboard!</div>
             </div>
         </div>

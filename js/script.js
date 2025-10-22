@@ -9,6 +9,14 @@ window.addEventListener('load', () => {
             }, 500);
         }, 1000);
     }
+    // Initialize Lucide icons
+    if (window.lucide && typeof window.lucide.createIcons === 'function') {
+        window.lucide.createIcons();
+    }
+    // Initialize EmailJS
+    if (window.emailjs && typeof window.emailjs.init === 'function') {
+        window.emailjs.init('5qMk8E1EWHnM9UeUy');
+    }
 });
 
 // ===== ENHANCED SCROLL ANIMATIONS =====
@@ -340,3 +348,60 @@ trailStyle.textContent = `
     }
 `;
 document.head.appendChild(trailStyle);
+
+// ===== CONTACT FORM LOGIC =====
+const contactForm = document.getElementById('contactForm');
+if (contactForm) {
+    contactForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const name = document.getElementById('name');
+        const email = document.getElementById('email');
+        const subject = document.getElementById('subject');
+        const message = document.getElementById('message');
+        const status = document.getElementById('formStatus');
+
+        let valid = true;
+        const setError = (field, msg) => {
+            const small = contactForm.querySelector(`[data-error-for="${field.id}"]`);
+            if (small) small.textContent = msg || '';
+        };
+
+        // Reset errors
+        [name, email, subject, message].forEach(f => setError(f, ''));
+
+        if (!name.value.trim()) { setError(name, 'Please enter your name'); valid = false; }
+        if (!email.value.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value)) {
+            setError(email, 'Please enter a valid email'); valid = false;
+        }
+        if (!subject.value.trim()) { setError(subject, 'Please add a subject'); valid = false; }
+        if (!message.value.trim() || message.value.trim().length < 10) {
+            setError(message, 'Message should be at least 10 characters'); valid = false;
+        }
+
+        if (!valid) return;
+
+        // Prefer EmailJS if available
+        if (window.emailjs && typeof window.emailjs.send === 'function') {
+            status.textContent = 'Sending...';
+            window.emailjs.send('service_f9s3am7', 'template_g1qhmrh', {
+                from_name: name.value,
+                from_email: email.value,
+                subject: subject.value,
+                message: message.value,
+                to_email: 'hlin14046@gmail.com'
+            }).then(() => {
+                status.textContent = 'Message sent! I’ll get back to you soon.';
+                contactForm.reset();
+            }).catch(() => {
+                status.textContent = 'Sending failed. Opening your email client as a fallback...';
+                const mailto = `mailto:hlin14046@gmail.com?subject=${encodeURIComponent(subject.value)}&body=${encodeURIComponent(`From: ${name.value} <${email.value}>\n\n${message.value}`)}`;
+                window.location.href = mailto;
+            });
+        } else {
+            const mailto = `mailto:hlin14046@gmail.com?subject=${encodeURIComponent(subject.value)}&body=${encodeURIComponent(`From: ${name.value} <${email.value}>\n\n${message.value}`)}`;
+            status.textContent = 'Opening your email client...';
+            window.location.href = mailto;
+            setTimeout(() => { status.textContent = 'If nothing opened, your email client may be blocked by the browser.'; }, 1500);
+        }
+    });
+}
