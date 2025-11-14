@@ -1,0 +1,112 @@
+.guitar-strings-nav {
+  position: fixed;
+  right: 40px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.guitar-string {
+  position: relative;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 15px;
+}
+
+.string-line {
+  width: 3px;
+  height: 60px;
+  background: var(--border-color);
+  border-radius: 2px;
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  position: relative;
+}
+
+.string-dot {
+  position: absolute;
+  top: 50%;
+  right: -4.5px;
+  transform: translateY(-50%);
+  width: 12px;
+  height: 12px;
+  background: var(--accent-primary);
+  border-radius: 50%;
+  opacity: 0;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 15px var(--shadow-color);
+  pointer-events: none;
+}
+
+.guitar-string:hover .string-line {
+  background: var(--accent-primary);
+  height: 70px;
+  box-shadow: 0 0 20px var(--shadow-color);
+  animation: stringVibrate 0.5s ease-in-out;
+}
+
+.guitar-string:hover .string-dot,
+.guitar-string.active .string-dot {
+  opacity: 1;
+}
+
+.guitar-string.active .string-line {
+  background: var(--gradient-primary);
+  box-shadow: 0 0 20px var(--shadow-color);
+}
+
+.guitar-string.active .string-dot {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.string-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  opacity: 0;
+  transform: translateX(10px);
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  pointer-events: none;
+  background: var(--bg-card);
+  padding: 6px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  backdrop-filter: blur(10px);
+}
+
+.guitar-string:hover .string-label {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.guitar-string.active .string-label {
+  color: var(--accent-primary);
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Stagger the string heights slightly for guitar-like appearance */
+.guitar-string:nth-child(1) .string-line { height: 55px; }
+.guitar-string:nth-child(2) .string-line { height: 58px; }
+.guitar-string:nth-child(3) .string-line { height: 60px; }
+.guitar-string:nth-child(4) .string-line { height: 62px; }
+.guitar-string:nth-child(5) .string-line { height: 65px; }
+
+/* Adjust hover heights proportionally */
+.guitar-string:nth-child(1):hover .string-line { height: 65px; }
+.guitar-string:nth-child(2):hover .string-line { height: 68px; }
+.guitar-string:nth-child(3):hover .string-line { height: 70px; }
+.guitar-string:nth-child(4):hover .string-line { height: 72px; }
+.guitar-string:nth-child(5):hover .string-line { height: 75px; }
+
+/* Mobile: Hide guitar strings navigation */
+@media (max-width: 968px) {
+  .guitar-strings-nav {
+    display: none;
+  }
+}

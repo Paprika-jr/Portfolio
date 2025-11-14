@@ -1,0 +1,45 @@
+.custom-cursor {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  mix-blend-mode: difference;
+}
+
+.custom-cursor svg {
+  filter: drop-shadow(0 0 8px var(--accent-primary));
+  transition: all 0.3s ease;
+}
+
+.custom-cursor.hovering {
+  transform: translate(-50%, -50%) scale(1.4) rotate(15deg);
+}
+
+.custom-cursor.hovering svg {
+  filter: drop-shadow(0 0 16px var(--accent-secondary));
+}
+
+.cursor-trail {
+  position: fixed;
+  width: 8px;
+  height: 8px;
+  background: var(--cursor-trail);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%, -50%);
+  animation: trailFade 0.6s ease-out forwards;
+}
+
+/* Mobile: Hide custom cursor and show default */
+@media (max-width: 768px) {
+  .custom-cursor,
+  .cursor-trail {
+    display: none;
+  }
+
+  body {
+    cursor: auto !important;
+  }
+}

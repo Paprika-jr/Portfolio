@@ -1,0 +1,294 @@
+.fretboard-container {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.fretboard-header {
+  margin-bottom: 30px;
+}
+
+.fretboard-header h3 {
+  font-size: 2rem;
+  font-weight: 800;
+  margin-bottom: 10px;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.fretboard-subtitle {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+}
+
+.fretboard {
+  position: relative;
+  width: 100%;
+  height: 350px;
+  background: linear-gradient(90deg, #3a2820 0%, #5a4530 100%);
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+  overflow: visible;
+}
+
+.strings-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* Fretboard strings (horizontal lines) */
+.fretboard-string {
+  position: absolute;
+  left: 5%;
+  right: 5%;
+  background: linear-gradient(90deg, #e0e0e0 0%, #a0a0a0 100%);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  border-radius: 2px;
+  pointer-events: none;
+}
+
+/* Fret lines (vertical lines) */
+.fret-line {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: rgba(255, 255, 255, 0.2);
+  pointer-events: none;
+}
+
+/* Nut (left edge) */
+.fretboard-nut {
+  position: absolute;
+  left: 5%;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: linear-gradient(180deg, #1a1a1a 0%, #3a3a3a 100%);
+  border-radius: 2px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+}
+
+/* Fret markers (dots) */
+.fret-markers {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+}
+
+.fret-marker {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.marker-dot {
+  width: 12px;
+  height: 12px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+/* Skill notes on fretboard */
+.skill-note {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.3s ease;
+}
+
+.note-circle {
+  width: 50px;
+  height: 50px;
+  background: var(--gradient-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  box-shadow: 0 4px 15px var(--shadow-color);
+  border: 3px solid var(--bg-secondary);
+  transition: all 0.3s ease;
+}
+
+.skill-note:hover .note-circle {
+  box-shadow: 0 6px 25px var(--shadow-color);
+  transform: scale(1.1);
+}
+
+.skill-note.active .note-circle {
+  animation: notePulse 0.6s ease-in-out;
+  box-shadow: 0 0 30px var(--accent-secondary);
+}
+
+@keyframes notePulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+}
+
+/* Skill tooltip */
+.skill-tooltip {
+  position: absolute;
+  top: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 8px 12px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  backdrop-filter: blur(10px);
+  z-index: 20;
+}
+
+.skill-note:hover .skill-tooltip {
+  opacity: 1;
+}
+
+.skill-tooltip strong {
+  display: block;
+  font-size: 0.9rem;
+  margin-bottom: 2px;
+  color: var(--text-primary);
+}
+
+.skill-level {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+/* Active skill display */
+.active-skill-display {
+  margin-top: 30px;
+  padding: 20px;
+  background: var(--bg-card);
+  border: 2px solid var(--accent-primary);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  box-shadow: 0 10px 30px var(--shadow-color);
+}
+
+.active-skill-icon {
+  font-size: 32px;
+  min-width: 40px;
+}
+
+.active-skill-display strong {
+  display: block;
+  font-size: 1.2rem;
+  margin-bottom: 5px;
+  color: var(--text-primary);
+}
+
+.level-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  background: var(--gradient-primary);
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: white;
+  margin-left: 10px;
+}
+
+/* Legend */
+.fretboard-legend {
+  margin-top: 30px;
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.legend-color {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid var(--border-color);
+}
+
+.legend-color.beginner {
+  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+}
+
+.legend-color.intermediate {
+  background: linear-gradient(135deg, #8b5cf6, #ec4899);
+}
+
+.legend-color.advanced {
+  background: linear-gradient(135deg, #ec4899, #f59e0b);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .fretboard {
+    height: 300px;
+  }
+
+  .note-circle {
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+  }
+
+  .skill-tooltip {
+    top: 50px;
+  }
+
+  .active-skill-display {
+    padding: 15px;
+  }
+
+  .active-skill-icon {
+    font-size: 28px;
+  }
+}
+
+@media (max-width: 480px) {
+  .fretboard {
+    height: 250px;
+  }
+
+  .note-circle {
+    width: 35px;
+    height: 35px;
+    font-size: 18px;
+    border-width: 2px;
+  }
+
+  .fretboard-header h3 {
+    font-size: 1.5rem;
+  }
+
+  .fretboard-legend {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+}

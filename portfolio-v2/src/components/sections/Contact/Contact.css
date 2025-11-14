@@ -1,0 +1,468 @@
+.contact-section {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 100px 20px;
+  background: var(--bg-primary);
+  position: relative;
+  overflow: hidden;
+}
+
+.contact-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  margin-top: 60px;
+}
+
+/* Contact Form - Guitar Amp Styling */
+.contact-form-container {
+  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+  border-radius: 20px;
+  padding: 40px;
+  border: 3px solid var(--border-color);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  position: relative;
+}
+
+.amp-header {
+  text-align: center;
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid var(--border-color);
+}
+
+.amp-logo {
+  font-size: 2rem;
+  font-weight: 900;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 5px;
+}
+
+.amp-model {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--accent-primary);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.form-group input,
+.form-group textarea {
+  background: var(--bg-secondary);
+  border: 2px solid var(--border-color);
+  border-radius: 8px;
+  padding: 12px 16px;
+  font-size: 1rem;
+  color: var(--text-primary);
+  font-family: inherit;
+  transition: all 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 20px rgba(139, 92, 246, 0.2);
+}
+
+.form-group input:disabled,
+.form-group textarea:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.submit-btn {
+  margin-top: 10px;
+  padding: 16px 32px;
+  background: var(--gradient-primary);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 25px var(--shadow-color);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.submit-btn svg {
+  flex-shrink: 0;
+}
+
+.spinning {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.submit-btn::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.submit-btn:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+.submit-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 35px var(--shadow-color);
+}
+
+.submit-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.submit-btn.success {
+  background: linear-gradient(135deg, #10b981, #059669);
+}
+
+.submit-btn.error {
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+}
+
+.submit-btn.sending {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+/* Amp Speaker Grill */
+.amp-grill {
+  margin-top: 30px;
+  height: 80px;
+  background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 100%);
+  border-radius: 10px;
+  border: 2px solid var(--border-color);
+  position: relative;
+  overflow: hidden;
+}
+
+.grill-pattern {
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+    90deg,
+    transparent,
+    transparent 10px,
+    rgba(255, 255, 255, 0.05) 10px,
+    rgba(255, 255, 255, 0.05) 11px
+  );
+}
+
+/* Social Links - Pedal Board Styling */
+.social-links-container {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.social-title {
+  font-size: 1.8rem;
+  font-weight: 800;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.pedal-board {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.pedal {
+  background: linear-gradient(135deg, #2d2d2d 0%, #1a1a1a 100%);
+  border: 3px solid var(--border-color);
+  border-radius: 16px;
+  padding: 20px;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  transition: all 0.3s ease;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+}
+
+.pedal:hover {
+  border-color: var(--accent-primary);
+  box-shadow: 0 15px 40px var(--shadow-color);
+}
+
+.pedal-top {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.pedal-icon {
+  font-size: 32px;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.5));
+  color: white;
+}
+
+.pedal-icon svg {
+  color: white;
+}
+
+.pedal-name {
+  font-size: 1rem;
+  font-weight: 700;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.pedal-body {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 15px 0;
+}
+
+.pedal-knob {
+  width: 40px;
+  height: 40px;
+  background: radial-gradient(circle, #4a4a4a 0%, #2a2a2a 100%);
+  border-radius: 50%;
+  border: 3px solid #1a1a1a;
+  position: relative;
+}
+
+.pedal-knob::after {
+  content: '';
+  position: absolute;
+  top: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 3px;
+  height: 12px;
+  background: var(--accent-primary);
+  border-radius: 2px;
+}
+
+.pedal-led {
+  width: 12px;
+  height: 12px;
+  background: var(--accent-secondary);
+  border-radius: 50%;
+  box-shadow: 0 0 15px var(--accent-secondary);
+  animation: ledBlink 2s ease-in-out infinite;
+}
+
+@keyframes ledBlink {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
+}
+
+.pedal-footer {
+  display: flex;
+  justify-content: center;
+}
+
+.pedal-switch {
+  width: 30px;
+  height: 15px;
+  background: var(--gradient-primary);
+  border-radius: 8px;
+  box-shadow: 0 3px 10px var(--shadow-color);
+}
+
+/* Quick Info */
+.quick-info {
+  background: var(--bg-card);
+  border: 2px solid var(--border-color);
+  border-radius: 16px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.info-item {
+  display: flex;
+  align-items: start;
+  gap: 15px;
+}
+
+.info-icon {
+  font-size: 28px;
+  min-width: 35px;
+  color: var(--text-primary);
+}
+
+.info-icon svg {
+  color: var(--text-primary);
+}
+
+.info-item strong {
+  display: block;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 5px;
+}
+
+.info-item p {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+/* Floating Music Notes Background */
+.floating-notes {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.music-note {
+  position: absolute;
+  font-size: 2rem;
+  color: var(--accent-primary);
+  opacity: 0.15;
+  animation: floatNote 15s linear infinite;
+  animation-delay: var(--delay);
+}
+
+.music-note:nth-child(1) { left: 10%; }
+.music-note:nth-child(2) { left: 20%; }
+.music-note:nth-child(3) { left: 35%; }
+.music-note:nth-child(4) { left: 50%; }
+.music-note:nth-child(5) { left: 65%; }
+.music-note:nth-child(6) { left: 75%; }
+.music-note:nth-child(7) { left: 85%; }
+.music-note:nth-child(8) { left: 95%; }
+
+@keyframes floatNote {
+  0% {
+    transform: translateY(100vh) rotate(0deg);
+  }
+  100% {
+    transform: translateY(-100vh) rotate(360deg);
+  }
+}
+
+/* Responsive - Tablet */
+@media (max-width: 968px) {
+  .contact-content {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .pedal-board {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Responsive - Mobile */
+@media (max-width: 640px) {
+  .contact-section {
+    padding: 80px 20px;
+  }
+
+  .contact-form-container {
+    padding: 30px 20px;
+  }
+
+  .amp-logo {
+    font-size: 1.5rem;
+  }
+
+  .social-title {
+    font-size: 1.5rem;
+  }
+
+  .pedal-board {
+    gap: 15px;
+  }
+
+  .pedal {
+    padding: 15px;
+  }
+
+  .pedal-icon {
+    font-size: 28px;
+  }
+
+  .pedal-name {
+    font-size: 0.85rem;
+  }
+
+  .quick-info {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .pedal-board {
+    grid-template-columns: 1fr;
+  }
+
+  .submit-btn {
+    font-size: 1rem;
+    padding: 14px 28px;
+  }
+}
