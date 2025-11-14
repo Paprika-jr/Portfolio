@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import ErrorBoundary from './components/common/ErrorBoundary';
 import CustomCursor from './components/layout/CustomCursor';
 import ThemeToggle from './components/layout/ThemeToggle';
 import ScrollProgress from './components/layout/ScrollProgress';
@@ -17,7 +18,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(true);
 
   return (
-    <>
+    <ErrorBoundary>
       {isLoading && <Loader onComplete={() => setIsLoading(false)} />}
 
       <CustomCursor />
@@ -36,7 +37,7 @@ function App() {
       </main>
 
       <Footer />
-    </>
+    </ErrorBoundary>
   );
 }
 

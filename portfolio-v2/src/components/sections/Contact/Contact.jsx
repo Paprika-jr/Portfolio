@@ -41,9 +41,22 @@ const Contact = () => {
     playClick();
     setFormStatus('sending');
 
-    // TODO: Implement actual API call to Vercel Serverless Function
-    // For now, simulate sending
-    setTimeout(() => {
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to send message');
+      }
+
+      // Success
       setFormStatus('success');
       setFormData({ name: '', email: '', message: '' });
 
@@ -51,7 +64,15 @@ const Contact = () => {
       setTimeout(() => {
         setFormStatus('idle');
       }, 3000);
-    }, 1500);
+    } catch (error) {
+      console.error('Contact form error:', error);
+      setFormStatus('error');
+      
+      // Reset to idle after showing error for 3 seconds
+      setTimeout(() => {
+        setFormStatus('idle');
+      }, 3000);
+    }
   };
 
   const socialLinks = [
