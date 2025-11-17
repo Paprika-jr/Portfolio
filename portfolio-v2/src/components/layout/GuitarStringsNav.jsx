@@ -1,19 +1,12 @@
-import { useEffect } from 'react';
 import { useScrollAnimation } from '../../hooks/useScrollAnimation';
-import { useSound } from '../../hooks/useSound';
-import { NAVIGATION_SECTIONS, GUITAR_STRINGS } from '../../utils/constants';
+import { NAVIGATION_SECTIONS } from '../../utils/constants';
 import './GuitarStringsNav.css';
 
 const GuitarStringsNav = () => {
   const { activeSection, scrollToSection } = useScrollAnimation();
-  const { playString } = useSound();
 
   const handleStringClick = (index) => {
     scrollToSection(index);
-    // Play the corresponding guitar string sound
-    if (GUITAR_STRINGS[index]) {
-      playString(GUITAR_STRINGS[index].frequency);
-    }
   };
 
   return (

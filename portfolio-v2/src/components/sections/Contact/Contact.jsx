@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useIntersectionObserver } from '../../../hooks/useIntersectionObserver';
-import { useSound } from '../../../hooks/useSound';
 import {
   GithubIcon,
   LinkedinIcon,
@@ -14,20 +13,24 @@ import {
   CheckIcon,
   XIcon,
   LoaderIcon,
-  MusicNoteIcon
+  MusicNoteIcon,
+  CopyIcon
 } from '../../common/Icons';
 import BackgroundParticles from '../../common/BackgroundParticles';
 import './Contact.css';
 
 const Contact = () => {
   const { targetRef, hasIntersected } = useIntersectionObserver();
-  const { playClick } = useSound();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     message: '',
   });
   const [formStatus, setFormStatus] = useState('idle'); // idle, sending, success, error
+  const [emailCopied, setEmailCopied] = useState(false);
+  const [showEmail, setShowEmail] = useState(false);
+
+  const myEmail = 'hlin14046@gmail.com';
 
   const handleChange = (e) => {
     setFormData({
@@ -38,7 +41,6 @@ const Contact = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    playClick();
     setFormStatus('sending');
 
     try {
@@ -75,6 +77,16 @@ const Contact = () => {
     }
   };
 
+  const handleCopyEmail = async () => {
+    try {
+      await navigator.clipboard.writeText(myEmail);
+      setEmailCopied(true);
+      setTimeout(() => setEmailCopied(false), 2000);
+    } catch (error) {
+      console.error('Failed to copy email:', error);
+    }
+  };
+
   const socialLinks = [
     {
       name: 'GitHub',
@@ -93,12 +105,6 @@ const Contact = () => {
       icon: InstagramIcon,
       url: 'https://www.instagram.com/ht3tlin_a?igsh=NTZ1emkyMTIydGpq&utm_source=qr',
       color: '#E4405F',
-    },
-    {
-      name: 'Email',
-      icon: MailIcon,
-      url: 'mailto:hlin14046@gmail.com',
-      color: '#ea4335',
     },
   ];
 
@@ -242,7 +248,6 @@ const Contact = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="pedal"
-                  onClick={playClick}
                   data-cursor-hover
                   initial={{ opacity: 0, y: 20 }}
                   animate={hasIntersected ? { opacity: 1, y: 0 } : {}}
@@ -264,7 +269,60 @@ const Contact = () => {
                   </div>
                 </motion.a>
               ))}
+
+              {/* Email Pedal with Copy Functionality */}
+              <motion.div
+                className="pedal email-pedal"
+                data-cursor-hover
+                initial={{ opacity: 0, y: 20 }}
+                animate={hasIntersected ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.5, delay: 0.8 }}
+                whileHover={{ y: -5 }}
+                onMouseEnter={() => setShowEmail(true)}
+                onMouseLeave={() => setShowEmail(false)}
+                onClick={handleCopyEmail}
+              >
+                <div className="pedal-top">
+                  <div className="pedal-icon">
+                    <MailIcon size={32} />
+                  </div>
+                  <div className="pedal-name">Email</div>
+                </div>
+                <div className="pedal-body">
+                  <div className="pedal-knob"></div>
+                  <div className="pedal-led"></div>
+                </div>
+                <div className="pedal-footer">
+                  <div className="pedal-switch"></div>
+                </div>
+
+                {/* Email reveal and copy notification */}
+                {showEmail && (
+                  <motion.div
+                    className="email-tooltip"
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0 }}
+                  >
+                    <CopyIcon size={14} /> Click to copy
+                    <br />
+                    <span className="email-address">{myEmail}</span>
+                  </motion.div>
+                )}
+              </motion.div>
             </div>
+
+            {/* Copy Success Notification */}
+            {emailCopied && (
+              <motion.div
+                className="copy-notification"
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0 }}
+              >
+                <CheckIcon size={16} /> Email copied to clipboard!
+              </motion.div>
+            )}
 
             {/* Quick Info */}
             <motion.div

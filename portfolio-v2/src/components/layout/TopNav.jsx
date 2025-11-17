@@ -1,14 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, useMotionValue, useSpring } from 'framer-motion';
 import { useScrollAnimation } from '../../hooks/useScrollAnimation';
-import { useSound } from '../../hooks/useSound';
 import { NAVIGATION_SECTIONS, SOCIAL_LINKS } from '../../utils/constants';
 import { GithubIcon, LinkedinIcon, InstagramIcon } from '../common/Icons';
 import './TopNav.css';
 
 const TopNav = () => {
   const { activeSection, scrollToSection } = useScrollAnimation();
-  const { playClick } = useSound();
   const [isScrolled, setIsScrolled] = useState(false);
   const [hoveredIndex, setHoveredIndex] = useState(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -36,7 +34,7 @@ const TopNav = () => {
       if (targetElement && container) {
         const targetRect = targetElement.getBoundingClientRect();
         const containerRect = container.getBoundingClientRect();
-        const leftPosition = targetRect.left - containerRect.left - 3; // Shift 3px to the left
+        const leftPosition = targetRect.left - containerRect.left - 4.5; // Shift 4px to the left
 
         setBlobPosition({
           x: leftPosition,
@@ -52,13 +50,11 @@ const TopNav = () => {
 
   const handleNavClick = (index) => {
     scrollToSection(index);
-    playClick();
     setIsMobileMenuOpen(false);
   };
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
-    playClick();
   };
 
   return (

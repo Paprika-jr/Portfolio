@@ -3,7 +3,6 @@ import ErrorBoundary from './components/common/ErrorBoundary';
 import CustomCursor from './components/layout/CustomCursor';
 import ThemeToggle from './components/layout/ThemeToggle';
 import ScrollProgress from './components/layout/ScrollProgress';
-import SoundToggle from './components/layout/SoundToggle';
 import Loader from './components/layout/Loader';
 import TopNav from './components/layout/TopNav';
 import GuitarStringsNav from './components/layout/GuitarStringsNav';
@@ -24,7 +23,6 @@ function App() {
       <CustomCursor />
       <ScrollProgress />
       <ThemeToggle />
-      <SoundToggle />
       <TopNav />
       <GuitarStringsNav />
 

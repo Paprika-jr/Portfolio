@@ -1,11 +1,9 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { useSound } from '../../../hooks/useSound';
-import { SKILLS, GUITAR_STRINGS } from '../../../utils/constants';
+import { SKILLS } from '../../../utils/constants';
 import './GuitarFretboard.css';
 
 const GuitarFretboard = () => {
-  const { playString, playClick } = useSound();
   const [activeSkill, setActiveSkill] = useState(null);
 
   // Flatten all skills into one array
@@ -15,9 +13,8 @@ const GuitarFretboard = () => {
     ...SKILLS.tools,
   ];
 
-  const handleSkillClick = (skill, stringIndex) => {
+  const handleSkillClick = (skill) => {
     setActiveSkill(skill);
-    playString(GUITAR_STRINGS[stringIndex % GUITAR_STRINGS.length].frequency);
   };
 
   return (
@@ -56,7 +53,7 @@ const GuitarFretboard = () => {
                 transition={{ duration: 0.4, delay: index * 0.05 }}
                 whileHover={{ scale: 1.2 }}
                 whileTap={{ scale: 0.95 }}
-                onClick={() => handleSkillClick(skill, stringIndex)}
+                onClick={() => handleSkillClick(skill)}
                 data-cursor-hover
               >
                 <div className="note-circle">

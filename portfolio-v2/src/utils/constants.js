@@ -16,22 +16,22 @@ export const SOCIAL_LINKS = {
 
 export const SKILLS = {
   frontend: [
-    { name: 'React', level: 'Advanced', icon: '⚛️', fret: 10 },
+    { name: 'React', level: 'Intermediate', icon: '⚛️', fret: 7 },
     { name: 'HTML/CSS', level: 'Advanced', icon: '🎨', fret: 11 },
     { name: 'JavaScript', level: 'Advanced', icon: '⚡', fret: 9 },
     { name: 'Vite', level: 'Intermediate', icon: '⚡', fret: 7 },
   ],
   backend: [
     { name: 'Node.js', level: 'Intermediate', icon: '🟢', fret: 6 },
-    { name: 'Firebase', level: 'Advanced', icon: '🔥', fret: 9 },
-    { name: 'Firestore', level: 'Advanced', icon: '💾', fret: 8 },
+    { name: 'Python', level: 'Intermediate', icon: '🐍', fret: 6 },
+    { name: 'Firebase', level: 'Intermediate', icon: '🔥', fret: 7 },
+    { name: 'Firestore', level: 'Intermediate', icon: '💾', fret: 7 },
     { name: 'Auth', level: 'Intermediate', icon: '🔐', fret: 7 },
   ],
   tools: [
-    { name: 'Git', level: 'Intermediate', icon: '📦', fret: 7 },
-    { name: 'Vercel', level: 'Advanced', icon: '▲', fret: 9 },
+    { name: 'Git', level: 'Advanced', icon: '📦', fret: 9 },
+    { name: 'Vercel', level: 'Intermediate', icon: '▲', fret: 7 },
     { name: 'VS Code', level: 'Advanced', icon: '💻', fret: 10 },
-    { name: 'Python', level: 'Intermediate', icon: '🐍', fret: 6 },
   ],
 };
 
@@ -127,18 +127,4 @@ export const EASTER_EGGS = {
     'b',
     'a',
   ],
-};
-
-export const SOUND_EFFECTS = {
-  stringE: '/sounds/string-e.mp3',
-  stringA: '/sounds/string-a.mp3',
-  stringD: '/sounds/string-d.mp3',
-  stringG: '/sounds/string-g.mp3',
-  stringB: '/sounds/string-b.mp3',
-  stringHighE: '/sounds/string-high-e.mp3',
-  chordC: '/sounds/chord-c.mp3',
-  chordG: '/sounds/chord-g.mp3',
-  click: '/sounds/click.mp3',
-  success: '/sounds/success.mp3',
-  error: '/sounds/error.mp3',
 };

@@ -1,11 +1,9 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { useSound } from '../../../hooks/useSound';
 import { SKILLS } from '../../../utils/constants';
 import './AmpSkills.css';
 
 const AmpSkills = () => {
-  const { playClick } = useSound();
   const [activeChannel, setActiveChannel] = useState('frontend');
 
   const channels = {
@@ -16,7 +14,6 @@ const AmpSkills = () => {
 
   const handleChannelSwitch = (channel) => {
     setActiveChannel(channel);
-    playClick();
   };
 
   const getKnobRotation = (level) => {
@@ -76,7 +73,6 @@ const AmpSkills = () => {
             {/* Knob */}
             <div
               className="amp-knob"
-              onClick={playClick}
               data-cursor-hover
             >
               <div

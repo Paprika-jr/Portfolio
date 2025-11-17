@@ -1,16 +1,13 @@
 import { useTheme } from '../../hooks/useTheme';
-import { useSound } from '../../hooks/useSound';
 import { SunIcon, MoonIcon } from '../common/Icons';
 import './ThemeToggle.css';
 
 const ThemeToggle = () => {
   const { theme, toggleTheme } = useTheme();
-  const { playClick } = useSound();
 
   const handleToggle = (newTheme) => {
     if (theme !== newTheme) {
       toggleTheme();
-      playClick();
     }
   };
 

@@ -1,6 +1,5 @@
 import { motion } from 'framer-motion';
 import { useIntersectionObserver } from '../../../hooks/useIntersectionObserver';
-import { useSound } from '../../../hooks/useSound';
 import { EDUCATION } from '../../../utils/constants';
 import { SchoolIcon, LocationIcon } from '../../common/Icons';
 import BackgroundParticles from '../../common/BackgroundParticles';
@@ -8,7 +7,6 @@ import './Education.css';
 
 const Education = () => {
   const { targetRef, hasIntersected } = useIntersectionObserver();
-  const { playClick } = useSound();
 
   return (
     <section className="education-section" data-section id="education" ref={targetRef}>
@@ -59,7 +57,6 @@ const Education = () => {
               education={edu}
               index={index}
               hasIntersected={hasIntersected}
-              onClick={playClick}
             />
           ))}
         </div>
@@ -69,7 +66,7 @@ const Education = () => {
 };
 
 // Timeline Item Component
-const TimelineItem = ({ education, index, hasIntersected, onClick }) => {
+const TimelineItem = ({ education, index, hasIntersected }) => {
   const isLeft = index % 2 === 0;
 
   return (
@@ -108,7 +105,6 @@ const TimelineItem = ({ education, index, hasIntersected, onClick }) => {
       <motion.div
         className="timeline-content"
         whileHover={{ y: -5, boxShadow: '0 20px 50px var(--shadow-color)' }}
-        onClick={onClick}
         data-cursor-hover
       >
         {/* Year Badge */}

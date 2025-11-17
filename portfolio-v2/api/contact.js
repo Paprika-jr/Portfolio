@@ -29,15 +29,7 @@ export default async function handler(req, res) {
     const sanitizedEmail = email.trim().substring(0, 100);
     const sanitizedMessage = message.trim().substring(0, 2000);
 
-    // Here you can integrate with email services like:
-    // - SendGrid
-    // - Resend
-    // - Nodemailer with SMTP
-    // - AWS SES
-    // - Or save to a database (Firebase, Supabase, etc.)
-
-    // Example: Using Resend (uncomment and configure if using Resend)
-    /*
+    // Send email using Resend
     const RESEND_API_KEY = process.env.RESEND_API_KEY;
     if (!RESEND_API_KEY) {
       throw new Error('RESEND_API_KEY is not configured');
@@ -50,30 +42,39 @@ export default async function handler(req, res) {
         'Authorization': `Bearer ${RESEND_API_KEY}`,
       },
       body: JSON.stringify({
-        from: 'Portfolio Contact <noreply@yourdomain.com>',
+        from: 'Portfolio Contact <onboarding@resend.dev>',
         to: ['hlin14046@gmail.com'],
-        subject: `New Contact Form Submission from ${sanitizedName}`,
+        reply_to: sanitizedEmail,
+        subject: `Portfolio Contact: ${sanitizedName}`,
         html: `
-          <h2>New Contact Form Submission</h2>
-          <p><strong>Name:</strong> ${sanitizedName}</p>
-          <p><strong>Email:</strong> ${sanitizedEmail}</p>
-          <p><strong>Message:</strong></p>
-          <p>${sanitizedMessage.replace(/\n/g, '<br>')}</p>
+          <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+            <h2 style="color: #a78bfa;">New Contact Form Submission 🎸</h2>
+            <div style="background: #f5f5f5; padding: 20px; border-radius: 8px; margin: 20px 0;">
+              <p><strong>Name:</strong> ${sanitizedName}</p>
+              <p><strong>Email:</strong> <a href="mailto:${sanitizedEmail}">${sanitizedEmail}</a></p>
+            </div>
+            <div style="background: white; padding: 20px; border-radius: 8px; border-left: 4px solid #a78bfa;">
+              <p><strong>Message:</strong></p>
+              <p style="white-space: pre-wrap;">${sanitizedMessage}</p>
+            </div>
+            <hr style="margin: 20px 0; border: none; border-top: 1px solid #ddd;">
+            <p style="color: #666; font-size: 12px;">
+              Sent from your portfolio contact form • ${new Date().toLocaleString()}
+            </p>
+          </div>
         `,
       }),
     });
 
     if (!response.ok) {
+      const errorData = await response.json();
+      console.error('Resend API error:', errorData);
       throw new Error('Failed to send email');
     }
-    */
 
-    // For now, we'll log the submission and return success
-    // In production, replace this with actual email service
-    console.log('Contact form submission:', {
+    console.log('Contact form submission sent successfully:', {
       name: sanitizedName,
       email: sanitizedEmail,
-      message: sanitizedMessage,
       timestamp: new Date().toISOString(),
     });
 
