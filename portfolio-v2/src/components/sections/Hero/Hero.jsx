@@ -48,7 +48,7 @@ const Hero = () => {
               transition={{ duration: 0.6, delay: 1 }}
             >
               <motion.a
-                href="/KhunHtetLinAung.CV.pdf"
+                href="/cv.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn btn-primary"
